@@ -24,7 +24,7 @@ const Admin= () => {
         <div className="d-flex justify-content-between" style={{width:"100vw", paddingLeft:"5rem", paddingRight:"5rem"}}>
         <h2>Admin List</h2>
         <h1 className='text-primary'>RBAC SOLUTIONS</h1>
-        <button className ="btn btn-primary"onClick={() =>navigate("/home")}>Home</button>
+        <button className ="btn btn-primary"onClick={() =>navigate("/home")} style={{height:"40px"}}>Home</button>
         </div>
       <table className="table table-striped" style={{maxWidth:"600px"}}>
         <thead>

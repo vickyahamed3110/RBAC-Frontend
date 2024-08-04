@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./App.css";
 import { storeData } from "./apis.js";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
@@ -6,6 +7,7 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false)
   const [role, setRole] = useState("Admin");
   const [popup, setpopup] = useState(false);
   const isAuthenticated = Boolean(localStorage.getItem("isAuthenticated"));
@@ -31,9 +33,14 @@ const Register = () => {
     } else {
       console.log("something error")
     }
-
-    
-  };
+   };
+   const changePwdView = () => {
+    if (showPassword){
+      setShowPassword(false)
+    } else {
+      setShowPassword(true)
+    }
+    }
 
   if (isAuthenticated) {
     return <Navigate to="/" />;
@@ -52,7 +59,7 @@ const Register = () => {
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="name">Name</label>
-                  <input
+                  <input 
                     type="text"
                     className="form-control"
                     id="name"
@@ -76,15 +83,19 @@ const Register = () => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
+                 <div className="d-flex align-items-center border rounded"> 
+                  <input 
+                    type={showPassword ? "text":"password"}
+                    className="form-control border-0" 
                     id="password"
                     placeholder="Enter your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                  />
+                  /> {!showPassword ?<i className="fa-solid fa-eye me-2" onClick = {changePwdView}></i>
+                 : <i class="fa-solid fa-eye-slash" onClick ={changePwdView}></i>}
+                  </div>
+                  
                 </div>
                 <div className="form-group">
                   <label htmlFor="roles">Roles</label>
