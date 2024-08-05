@@ -46,8 +46,7 @@ const Login = () => {
 
   return (
       
-      <div className="d-flex flex-column align-items-center" >
-        <h2>Login</h2>
+      <div className="d-flex flex-column align-items-center mt-5" >
       <form onSubmit={handleSubmit} style={{width:"60vw"}}>
         <div className="mb-3">
           {loginpopup && <div className="loginpopup">Password incorrect</div>}
