@@ -40,11 +40,12 @@ const User= () => {
       <div className="container mt-4" style ={{display:"flex", flexDirection:'column', alignItems:"center"}}>
       <div className='d-flex justify-content-between' style={{width:"100vw", paddingLeft:"5rem", paddingRight:"5rem"}} >
       <h2>User List</h2>
-      <h1 className='text-primary'>RBAC SOLUTIONS</h1>
+      <h1 className='text-primary'><img src= "https://cdn-icons-png.flaticon.com/128/2103/2103665.png"
+       style={{height:"40px"}}/>RBAC SOLUTIONS</h1>
       <button className ="btn btn-primary"onClick={() =>navigate("/home")}style={{height:"40px"}}>Home</button>
       </div>
       
-      <table className="table table-striped" style={{maxWidth:"600px"}}>
+      <table className="table table-striped" style={{maxWidth:"600px", textAlign:"center"}}>
         <thead>
           <tr>
             <th>ID</th>
