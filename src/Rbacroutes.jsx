@@ -4,17 +4,11 @@ import Login from './Login';
 import Register from './Register';
 import Homepage from './Homepage';
 import User from './user';
-//import ForgotPassword from './forgetpwd';
 import Admin from './admin';
-
-
-
-
 
 function Rbacroutes() {
 
   return (
-    
     <>
     <BrowserRouter>
     <Routes>
@@ -22,16 +16,8 @@ function Rbacroutes() {
     <Route path="/home" element={<Homepage/>}></Route>
     <Route path="/" element={<Register/>}></Route>
     <Route path="/user" element={<User/>}></Route>
-    {/* <Route path="/forgetpassword" element={<ForgotPassword/>}></Route> */}
     <Route path="/admin" element={<Admin/>}></Route>
-    
-
-
-
     </Routes>
-    
-    
-    
     </BrowserRouter>
     
       </>

@@ -8,21 +8,13 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false)
-  const [role, setRole] = useState("Admin");
   const [popup, setpopup] = useState(false);
   const isAuthenticated = Boolean(localStorage.getItem("isAuthenticated"));
-
   const navigate = useNavigate();
-
-  const handleRoleChange = (event) => {
-    setRole(event.target.value);
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Handle form submission logic
-    console.log({name, email, password, role})
-   const data =  await storeData({ name, email, password, role });
+   const data =  await storeData({ name, email, password});
     if (data.code === 1 ){
       setpopup(true)
       setTimeout(() => {
@@ -95,22 +87,7 @@ const Register = () => {
                   /> {!showPassword ?<i className="fa-solid fa-eye me-2" onClick = {changePwdView}></i>
                  : <i class="fa-solid fa-eye-slash" onClick ={changePwdView}></i>}
                   </div>
-                  
-                </div>
-                <div className="form-group">
-                  <label htmlFor="roles">Roles</label>
-                  <select
-                    className="form-control"
-                    id="role"
-                    value={role}
-                    onChange={handleRoleChange}
-                    required
-                  >
-                    
-                    <option value="User">User</option>
-                    <option value="Admin">Admin</option>
-                  </select>
-                </div>
+                  </div>
                 <button type="submit" className="btn btn-primary btn-block">
                   Register
                 </button>

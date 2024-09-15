@@ -22,33 +22,9 @@ const loginData =async (userData) => {
     return await response.json()
 }
 
-// const forgetPassword =async (userData) => {
-//     console.log(userData);
-//     try {
-//         const response = await fetch (`${backendURL}/forgetPassword`,{
-//             method:"POST",
-//             body:JSON.stringify(userData),
-//             headers: {
-//             "Content-Type": "application/json; charset=utf-8"
-//             }
-//         })
-//         return await response.json()
-//     }
-     
-//     catch (error) {
-//       console.log(error);  
-//     }}
-
-    const getUserData = async () => {
+const getUserData = async () => {
         const response = await fetch (`${backendURL}/users`,{
          headers:{"Authorization":localStorage.getItem("role")} 
-        })
-        return await response.json()
-    }
-
-    const getAdminData = async () => {
-        const response = await fetch (`${backendURL}/admin`,{
-        headers:{"Authorization":localStorage.getItem("role")} 
         })
         return await response.json()
     }
@@ -84,4 +60,4 @@ const loginData =async (userData) => {
             return await response.json()  
     }
     
-export {storeData, loginData, getUserData, getAdminData, deleteUserData, assignRole, changeForm}
+export {storeData, loginData, getUserData, deleteUserData, assignRole, changeForm}

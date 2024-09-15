@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getAdminData } from './apis';
+import { getUserData } from './apis';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
@@ -8,11 +8,11 @@ const Admin= () => {
   const navigate = useNavigate()
   const token = localStorage.getItem("role")
   const details = jwtDecode(token)
-    console.log(details.role)
   const getAdmin= async () =>{
-    const data = await getAdminData()
-    setAdmin(data)
-  }
+    const data = await getUserData()
+    const filterItems = data.filter((admin)=>admin.role =='Admin')
+    setAdmin(filterItems)
+  } 
   useEffect(() =>{
     getAdmin()
   },[]) 

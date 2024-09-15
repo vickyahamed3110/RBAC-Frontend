@@ -11,24 +11,19 @@ const User= () => {
   const token = localStorage.getItem("role")
   const details = jwtDecode(token)
   const deleteUser = async (email) => {
-    console.log(email)
     await deleteUserData(email)
     setRender(render + 1)
   }
   const getUser= async () =>{
     const data = await getUserData()
-    setUser(data)
+    const filterItems = data.filter((user)=> user.role =='User')
+    setUser(filterItems)
   }
   const handleRoleChange = async(event, email) => {
   setRole(event.target.value);
-  console.log({role:event.target.value})
-   console.log(email)
    await assignRole({email, role:event.target.value})
    setRender(render + 1)
   };
-  // const assignRoleFn = async(email) =>{
-  //   await assignRole({email, role})
-  // }
   const handleShow = async (useremail) => {
     await changeForm({useremail})
     setRender(render + 1)
