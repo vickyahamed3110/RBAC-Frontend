@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { getUserData } from './apis';
+import { getUserData, getLoggedUserData } from './apis';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
 const Admin= () => {
   const [admin, setAdmin] = useState([])
+  const [email, setEmail] = useState(false)
+  const[role, setRole] = useState('')
   const navigate = useNavigate()
   const token = localStorage.getItem("role")
   const details = jwtDecode(token)
@@ -16,7 +18,15 @@ const Admin= () => {
   useEffect(() =>{
     getAdmin()
   },[]) 
-  if(details.role !="Admin"){
+  const detailsUser = async() => {
+    const data = await getLoggedUserData(details.email)
+    setEmail(data.isAccepted)
+    setRole(data.role)
+   }
+   useEffect(() => {
+     detailsUser()
+   },[])
+  if(role !="Admin"){
     return <h1>You are not authorized</h1>
      }
   return (
@@ -26,6 +36,7 @@ const Admin= () => {
         <h1 className='text-primary'><img src= "https://cdn-icons-png.flaticon.com/128/2103/2103665.png"
        style={{height:"40px"}}/> RBAC SOLUTIONS</h1>
         <button className ="btn btn-primary"onClick={() =>navigate("/home")} style={{height:"40px"}}>Home</button>
+        <button className ="btn btn-primary"onClick={() =>navigate("/request")} style={{height:"40px"}}>Request</button>
         </div>
       <table className="table table-striped" style={{maxWidth:"600px" , textAlign:"center"}}>
         <thead>

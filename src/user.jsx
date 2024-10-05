@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { deleteUserData, getUserData, assignRole, changeForm} from './apis';
+import { deleteUserData, getUserData, assignRole, changeForm, getLoggedUserData} from './apis';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
@@ -7,6 +7,8 @@ const User= () => {
   const [user, setUser] = useState([])
   const [render, setRender] = useState(0)
   const [role, setRole] = useState("")
+  const [loginrole, setLoginRole] = useState('')
+  const [email, setEmail] = useState(false)
   const navigate = useNavigate()
   const token = localStorage.getItem("role")
   const details = jwtDecode(token)
@@ -19,6 +21,14 @@ const User= () => {
     const filterItems = data.filter((user)=> user.role =='User')
     setUser(filterItems)
   }
+  const detailsUser = async() => {
+   const data = await getLoggedUserData(details.email)
+   setEmail(data.isAccepted)
+   setLoginRole(data.role)
+  }
+  useEffect(() => {
+    detailsUser()
+  },[])
   const handleRoleChange = async(event, email) => {
   setRole(event.target.value);
    await assignRole({email, role:event.target.value})
@@ -31,6 +41,9 @@ const User= () => {
   useEffect(() =>{
     getUser()
   },[render]) 
+  if(email  !='accepted'){
+    return <h1>You are not authorized</h1>
+     }
   return (
       <div className="container mt-4" style ={{display:"flex", flexDirection:'column', alignItems:"center"}}>
       <div className='d-flex justify-content-between' style={{width:"100vw", paddingLeft:"5rem", paddingRight:"5rem"}} >
@@ -72,10 +85,10 @@ const User= () => {
               <td>{user.date}Yrs</td>
               
               <td>
-              {details.role != user.role && <button onClick={() =>deleteUser(user.email)}className='btn btn-danger' style={{height:"80%"}}><i className="fa-solid fa-trash-can"></i></button>}
+              {loginrole== 'Admin' && <button onClick={() =>deleteUser(user.email)}className='btn btn-danger' style={{height:"80%"}}><i className="fa-solid fa-trash-can"></i></button>}
               </td>
               <td>
-               {details.role != user.role && <button className='btn btn-success' onClick={()=>handleShow(user.email)} style={{height:"80%", width:"5.5rem"}}><i className="fa-solid fa-user-pen"></i> Role</button>}
+               {loginrole=='Admin' && <button className='btn btn-success' onClick={()=>handleShow(user.email)} style={{height:"80%", width:"5.5rem"}}><i className="fa-solid fa-user-pen"></i> Role</button>}
               </td>
             </tr>
           ))}
