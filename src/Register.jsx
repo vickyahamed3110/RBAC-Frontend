@@ -88,7 +88,7 @@ const Register = () => {
                  : <i class="fa-solid fa-eye-slash" onClick ={changePwdView}></i>}
                   </div>
                   </div>
-                <button type="submit" className="btn btn-primary btn-block">
+                <button type="submit" className="btn btn-primary btn-block mt-2">
                   Register
                 </button>
                 <Link to="/login" style = {{float:"right"}}>Login</Link>

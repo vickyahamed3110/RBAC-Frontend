@@ -42,7 +42,7 @@ const User= () => {
     getUser()
   },[render]) 
   if(email  !='accepted'){
-    return <h1>You are not authorized</h1>
+    return <h1>Your Request has been sent to Admin Please wait for Admin Response...</h1>
      }
   return (
       <div className="container mt-4" style ={{display:"flex", flexDirection:'column', alignItems:"center"}}>
